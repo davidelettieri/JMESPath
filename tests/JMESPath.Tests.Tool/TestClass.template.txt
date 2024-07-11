@@ -1,0 +1,14 @@
+public class {{#name}}
+{
+{{#tests}}
+    [Theory]
+    {{#cases}}
+    [InlineData("{{{#expression}}}","{{{#stringResult}}}")]
+    {{/cases}}
+    public async Task {{#testCase}}(string expression, string json)
+    {
+        JsonNode node = JsonNode.Parse(json);
+    }
+    
+{{/tests}}
+}
