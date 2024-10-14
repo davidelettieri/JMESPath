@@ -21,7 +21,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\JMESPath\JMESPath.csproj" />
+        <None Include="$(ProjectDir)assets\**" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\JMESPath\JMESPath.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
-using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace JMESPath;
 
-public static class JMESPathQuery
+public static class JMESPath
 {
-    public static JsonDocument Run(JsonDocument source, string expression) => throw new NotImplementedException();
+    public static JsonNode? Search(string expression, JsonNode document) => new JsonObject();
 }
