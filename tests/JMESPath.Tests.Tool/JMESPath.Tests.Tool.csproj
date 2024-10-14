@@ -8,6 +8,9 @@
     </PropertyGroup>
     <ItemGroup>
         <None Include="$(ProjectDir)assets\**" CopyToOutputDirectory="PreserveNewest" />
+        <None Update="TestClass.template.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Fluid.Core" Version="2.11.0" />

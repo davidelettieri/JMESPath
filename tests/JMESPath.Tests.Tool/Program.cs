@@ -17,20 +17,18 @@ if (parser.TryParse(templateSource, out var template, out var error))
             continue;
         }
         
-        Console.WriteLine($"[InlineData(\"{testFile}\")]");
-        //
-        // var fileInfo = new FileInfo(testFile);
-        //
-        // var source = File.ReadAllText(testFile);
-        // var tests = JsonSerializer.Deserialize<Test[]>(source,
-        //     new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
-        // var name = fileInfo.Name[..^5].Dehumanize();
-        // var testClass = new TestClass(name, tests);
-        // var context = new TemplateContext(testClass,
-        //     new TemplateOptions() { MemberAccessStrategy = new UnsafeMemberAccessStrategy() });
-        // var result = template.Render(context);
-        // Console.WriteLine(result);
-        // File.WriteAllText("/home/davide/repos/JMESPath/tests/JMESPath.Tests/" + name + ".cs", result);
+        var fileInfo = new FileInfo(testFile);
+        
+        var source = File.ReadAllText(testFile);
+        var tests = JsonSerializer.Deserialize<Test[]>(source,
+            new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+        var name = fileInfo.Name[..^5].Dehumanize();
+        var testClass = new TestClass(name, tests);
+        var context = new TemplateContext(testClass,
+            new TemplateOptions() { MemberAccessStrategy = new UnsafeMemberAccessStrategy() });
+        var result = template.Render(context);
+        Console.WriteLine(result);
+        File.WriteAllText("/home/davide/repos/JMESPath/tests/JMESPath.Tests/" + name + ".cs", result);
     }
 }
 else
@@ -40,6 +38,6 @@ else
 
 record TestClass(string Name, Test[] Tests);
 
-record Test(string Given, TestCase[] Cases);
+record Test(JsonValue Given, TestCase[] Cases);
 
-record TestCase(string Expression, string Result);
+record TestCase(string Expression, JsonValue Result);
